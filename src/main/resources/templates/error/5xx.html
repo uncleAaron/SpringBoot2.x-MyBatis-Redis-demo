@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Dashboard Template for Bootstrap</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/resources/css/dashboard.css}" rel="stylesheet">
+    <style type="text/css">
+        /* Chart.js */
+
+        @-webkit-keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        .chartjs-render-monitor {
+            -webkit-animation: chartjs-render-animation 0.001s;
+            animation: chartjs-render-animation 0.001s;
+        }
+    </style>
+</head>
+
+<body>
+<!-- 这里用了thymeleaf的公共部分引入功能，th:replace="模板名 :: 引入名(被标记了th:fragment的部分，也可以是id)" -->
+<div th:replace="~{commons/bar :: topbar}"></div>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- 这里用了thymeleaf的公共部分引入功能，th:replace="模板名 :: 引入名(被标记了th:fragment的部分，也可以用选择器选择，如#id)" -->
+        <!-- 引入侧边栏 -->
+        <div th:replace="~{commons/bar :: #sidebar}"></div>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <p> </p>
+            <h1>5xx</h1>
+            <!--<h4>code: [[${status}}]]</h4>-->
+            <!--<h4>message: [[${message}}]]</h4>-->
+            <!--<h4>timestamp: [[${timestamp}]]</h4>-->
+        </main>
+    </div>
+</div>
+
+
+</body>
+
+</html>

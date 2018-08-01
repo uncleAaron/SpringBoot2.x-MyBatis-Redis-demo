@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header">
+    <title>Title</title>
+    <link type="text/css" rel="stylesheet" href="/static/css/bootstrap.css"/>
+</head>
+<body>
+<!--th:object="${user}"-->
+<form th:method="post" th:action="@{/update}" >
+    name:<input type="text" name="name" id="name"><br/>
+    id:<input type="text" name="id" id="id"><br/>
+    Class:<input type="text" name="aSClass.id" id="class"><br/>
+    <input type="submit" class="btn btn-success" value="确认">
+</form>
+</body>
+</html>

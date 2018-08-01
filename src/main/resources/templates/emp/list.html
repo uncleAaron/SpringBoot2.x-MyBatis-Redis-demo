@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Dashboard Template for Bootstrap</title>
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.css" th:href="@{/static/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/static/css/dashboard.css}" rel="stylesheet">
+</head>
+
+<body>
+<!-- 这里用了thymeleaf的公共部分引入功能，th:replace="模板名 :: 引入名(被标记了th:fragment的部分，也可以是id)" -->
+<div th:replace="~{commons/bar :: topbar}"></div>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- 这里用了thymeleaf的公共部分引入功能，th:replace="模板名 :: 引入名(被标记了th:fragment的部分，也可以用选择器选择，如#id)" -->
+        <!-- 引入侧边栏 -->
+        <div th:replace="~{commons/bar :: #sidebar}"></div>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+
+
+            <!--<canvas class="my-4 w-10" id="myChart" width="20" height="20"></canvas>-->
+            <div class="my-5 w-10"> </div>
+            <h2><a class="btn btn-sm btn-success" href="/emp" th:href="@{/emp}">用户添加</a></h2>
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>姓名</th>
+                        <th>班级号</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user:${users}">
+                        <td th:text="*{user.getId()}">0x0000</td>
+                        <td th:text="*{user.getName()}">null</td>
+                        <td th:text="*{user.getaSClass().getName()}">null</td>
+                        <td>
+                            <a class="btn btn-sm btn-primary" th:href="@{/emp/} + ${user.id}">编辑</a>
+                            <!-- 为了能使这个按钮点按后指向本条数据，在这里先设置新属性，内容为本条记录uri，然后在js中设置form路径 -->
+                            <button th:attr="del_uri=@{/emp/} + ${user.id}" type="submit" class="btn btn-sm btn-warning deleteBtn" >删除</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <form id="deleteUser" method="post">
+                    <input type="hidden" name="_method" value="delete"/>
+                </form>
+            </div>
+        </main>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+<!-- 这个表单由按钮触发js生效，放在这的目的是因为不影响表格布局（）button表单太重了 -->
+<!-- 删除Delete请求，delete请求和put一样，要用name为_method，value为delete的隐藏域 -->
+<script>
+    $(".deleteBtn").click(function () {
+        $("#deleteUser").attr("action",$(this).attr("del_uri")).submit();
+        return false;
+    })
+</script>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script>window.jQuery || document.write('<script th:src="@{/resources/js/jquery-slim.min.js}"><\/script>')</script>
+<script th:src="@{/resources/js/vendor/popper.min.js}"></script>
+<script th:src="@{/resources/js/bootstrap.min.js}"></script>
+
+<!-- Icons -->
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script>
+    feather.replace()
+</script>
+
+</body>
+</html>

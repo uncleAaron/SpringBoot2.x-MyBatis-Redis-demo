@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:each="test:${test}">
+    <span th:text="${test}"></span>
+</div>
+<div th:each="score:${scores}">
+    <span th:text="${score}"></span>
+    <span th:if="${score} <= 60">不合格</span>
+    <span th:if="${score} >= 60 and ${score} < 70">刚好合格</span>
+    <span th:if="${score} >= 70 and ${score} < 80">中等</span>
+    <span th:if="${score} >= 80 and ${score} < 90">良好</span>
+    <span th:if="${score} >= 90 ">优秀</span>
+</div>
+</body>
+</html>
